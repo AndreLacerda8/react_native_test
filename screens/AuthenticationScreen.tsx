@@ -8,6 +8,8 @@ import { AuthenticationProps } from '../navigations/AuthNavigation'
 import { api } from '../services/axios.config'
 import { Alert, StyleSheet, Text } from 'react-native'
 import { useForm } from "react-hook-form";
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../store/actions/user'
 
 const ForgotPassContainer = styled.TouchableOpacity`
   width: 100%;
@@ -21,26 +23,34 @@ const ForgotPass = styled.Text`
   padding-right: 27px;
 `
 
+interface IFormInput{
+  name: string
+  email: string
+  password: string
+}
+
 export function AuthenticationScreen ({ navigation }: AuthenticationProps) {
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const { control, handleSubmit, formState: { errors } } = useForm<IFormInput>({
     defaultValues: {
       email: '',
       password: ''
     }
   })
 
+  const dispatch = useDispatch()
 
-  async function login(formData: any){
-    try {
-      const { data } = await api.post('/login', {
-        email: formData.email,
-        password: formData.password
-      })
-      console.log('DATA: ', data)
-      navigation.navigate('Dashboard')
-    } catch(error: any){
-      Alert.alert(error.message)
-    }
+  async function login({ email, password }: IFormInput){
+    dispatch(loginUser({ email, password }))
+    // try {
+    //   const { data } = await api.post('/login', {
+    //     email: formData.email,
+    //     password: formData.password
+    //   })
+    //   console.log('DATA: ', data)
+    //   navigation.navigate('Dashboard')
+    // } catch(error: any){
+    //   Alert.alert(error.message)
+    // }
   }
 
   return (

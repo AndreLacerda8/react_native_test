@@ -1,19 +1,40 @@
 import { useForm } from 'react-hook-form'
+import { Alert } from 'react-native'
 import { CustomButton } from '../components/auth/CustomButton'
 import { Form } from '../components/auth/Form'
 import { FormTitle } from '../components/auth/FormTitle'
 import { Input, InputEmail, InputPassword } from '../components/auth/Input'
 import { Screen } from '../components/auth/Screen'
 import { RegistrationProps } from '../navigations/AuthNavigation'
+import { api } from '../services/axios.config'
+
+interface IFormInput{
+  name: string
+  email: string
+  password: string
+}
 
 export function RegistrationScreen ({ navigation }: RegistrationProps){
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const { control, handleSubmit, formState: { errors } } = useForm<IFormInput>({
     defaultValues: {
       name: '',
       email: '',
       password: ''
     }
   })
+
+  async function createUser(formData: IFormInput){
+    try{
+      const { data } = await api.post('/user/create', {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+      })
+      console.log(data)
+    } catch(error: any){
+      Alert.alert(error.message)
+    }
+  }
 
   return (
     <Screen margin={50}>
@@ -29,7 +50,7 @@ export function RegistrationScreen ({ navigation }: RegistrationProps){
         />
         <InputEmail control={control} errors={errors} />
         <InputPassword control={control} errors={errors} />
-        <CustomButton onPress={handleSubmit(() => {})} title='Register' color='#B5C401' />
+        <CustomButton onPress={handleSubmit(createUser)} title='Register' color='#B5C401' />
       </Form>
       <CustomButton onPress={() => navigation.navigate('Authentication')} title='Back' color='#707070' left />
     </Screen>

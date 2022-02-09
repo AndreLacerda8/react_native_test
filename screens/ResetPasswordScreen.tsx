@@ -7,7 +7,7 @@ import { Screen } from '../components/auth/Screen'
 import { ResetPasswordProps } from '../navigations/AuthNavigation'
 
 export function ResetPasswordScreen ({ navigation }: ResetPasswordProps){
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const { control, handleSubmit, formState: { errors } } = useForm<{email: string}>({
     defaultValues: {
       email: ''
     }
