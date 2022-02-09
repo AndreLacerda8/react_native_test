@@ -5,10 +5,6 @@ import { Input } from '../components/auth/Input'
 import { Screen } from '../components/auth/Screen'
 import { RegistrationProps } from '../navigations/AuthNavigation'
 
-interface IProps{
-  navigation: any
-}
-
 export function RegistrationScreen ({ navigation }: RegistrationProps){
   return (
     <Screen margin={50}>

@@ -1,4 +1,4 @@
-import { Keyboard, ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { Keyboard, ScrollView, TouchableWithoutFeedback, View } from 'react-native'
 import styled from 'styled-components/native'
 
 const ScreenStyle = styled.View`
