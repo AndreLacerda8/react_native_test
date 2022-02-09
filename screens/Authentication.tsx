@@ -20,7 +20,7 @@ const ForgotPass = styled.Text`
 
 export function Authentication () {
   return (
-    <Screen margin={40}>
+    <Screen margin={50}>
       <FormTitle>Authentication</FormTitle>
       <Form>
         <Input placeholder='Email' keyboardType='email-address' autoCapitalize='none' />

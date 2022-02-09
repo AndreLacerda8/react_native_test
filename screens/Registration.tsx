@@ -4,13 +4,15 @@ import { FormTitle } from '../components/auth/FormTitle'
 import { Input } from '../components/auth/Input'
 import { Screen } from '../components/auth/Screen'
 
-export function ResetPasswordScreen(){
+export function Registration(){
   return (
-    <Screen margin={90}>
-      <FormTitle>Reset password</FormTitle>
+    <Screen margin={50}>
+      <FormTitle>Registration</FormTitle>
       <Form>
-        <Input placeholder='Email' />
-        <CustomButton title='Send link' color='#B5C401' />
+        <Input placeholder='Name' />
+        <Input placeholder='Email' keyboardType='email-address' autoCapitalize='none' />
+        <Input placeholder='password' secureTextEntry autoCapitalize='none' />
+        <CustomButton title='Register' color='#B5C401' />
       </Form>
       <CustomButton title='Back' color='#707070' left />
     </Screen>
