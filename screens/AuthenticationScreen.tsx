@@ -40,17 +40,12 @@ export function AuthenticationScreen ({ navigation }: AuthenticationProps) {
   const dispatch = useDispatch()
 
   async function login({ email, password }: IFormInput){
-    dispatch(loginUser({ email, password }))
-    // try {
-    //   const { data } = await api.post('/login', {
-    //     email: formData.email,
-    //     password: formData.password
-    //   })
-    //   console.log('DATA: ', data)
-    //   navigation.navigate('Dashboard')
-    // } catch(error: any){
-    //   Alert.alert(error.message)
-    // }
+    try {
+      await dispatch(loginUser({ email, password }))
+      navigation.navigate('Dashboard')
+    } catch(error: any){
+      Alert.alert(error.message)
+    }
   }
 
   return (

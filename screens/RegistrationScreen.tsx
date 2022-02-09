@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Alert } from 'react-native'
+import { useDispatch } from 'react-redux'
 import { CustomButton } from '../components/auth/CustomButton'
 import { Form } from '../components/auth/Form'
 import { FormTitle } from '../components/auth/FormTitle'
@@ -7,6 +8,7 @@ import { Input, InputEmail, InputPassword } from '../components/auth/Input'
 import { Screen } from '../components/auth/Screen'
 import { RegistrationProps } from '../navigations/AuthNavigation'
 import { api } from '../services/axios.config'
+import { signupUser } from '../store/actions/user'
 
 interface IFormInput{
   name: string
@@ -23,14 +25,12 @@ export function RegistrationScreen ({ navigation }: RegistrationProps){
     }
   })
 
-  async function createUser(formData: IFormInput){
+  const dispatch = useDispatch()
+
+  async function createUser({ name, email, password }: IFormInput){
     try{
-      const { data } = await api.post('/user/create', {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password
-      })
-      console.log(data)
+      await dispatch(signupUser({ name, email, password }))
+      navigation.navigate('Dashboard')
     } catch(error: any){
       Alert.alert(error.message)
     }
