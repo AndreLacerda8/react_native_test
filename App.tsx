@@ -1,9 +1,7 @@
-import { Authentication } from './screens/Authentication'
-import { Registration } from './screens/Registration'
-import { ResetPasswordScreen } from './screens/ResetPasswordScreen'
+import { AuthNavigation } from './navigations/AuthNavigation'
 
 export default function App() {
   return (
-    <ResetPasswordScreen />
+    <AuthNavigation />
   );
 }

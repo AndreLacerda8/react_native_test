@@ -28,12 +28,13 @@ const TextButton = styled.Text<ITextButton>`
 interface IProps{
   title: string
   color: string
+  onPress: () => void
   left?: boolean
 }
 
 export function CustomButton(props: IProps){
   return (
-    <Button activeOpacity={.5}>
+    <Button onPress={props.onPress} activeOpacity={.5}>
       {props.left ? (
         <>
           <AntDesign name='arrowleft' size={30} color={props.color} />

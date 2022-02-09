@@ -4,6 +4,7 @@ import { CustomButton } from '../components/auth/CustomButton'
 import { FormTitle } from '../components/auth/FormTitle'
 import { Input } from '../components/auth/Input'
 import { Form } from '../components/auth/Form'
+import { AuthenticationProps } from '../navigations/AuthNavigation'
 
 
 const ForgotPassContainer = styled.TouchableOpacity`
@@ -18,19 +19,23 @@ const ForgotPass = styled.Text`
   padding-right: 27px;
 `
 
-export function Authentication () {
+interface IProps{
+  navigation: any
+}
+
+export function AuthenticationScreen ({ navigation }: AuthenticationProps) {
   return (
     <Screen margin={50}>
       <FormTitle>Authentication</FormTitle>
       <Form>
         <Input placeholder='Email' keyboardType='email-address' autoCapitalize='none' />
         <Input placeholder='Password' secureTextEntry autoCapitalize='none' />
-        <ForgotPassContainer activeOpacity={.5}>
+        <ForgotPassContainer onPress={() => navigation.navigate('ResetPassword')} activeOpacity={.5}>
           <ForgotPass>I forgot my password</ForgotPass>
         </ForgotPassContainer>
-        <CustomButton title='Login' color='#B5C401' />
+        <CustomButton onPress={() => {}} title='Login' color='#B5C401' />
       </Form>
-      <CustomButton title='Sign Up' color='#707070' />
+      <CustomButton onPress={() => navigation.navigate('Registration')} title='Sign Up' color='#707070' />
     </Screen>
   )
 }
