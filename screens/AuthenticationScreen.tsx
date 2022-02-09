@@ -27,7 +27,7 @@ export function AuthenticationScreen ({ navigation }: AuthenticationProps) {
       email: '',
       password: ''
     }
-  });
+  })
 
 
   async function login(formData: any){

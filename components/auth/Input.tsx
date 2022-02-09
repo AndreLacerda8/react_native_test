@@ -2,7 +2,7 @@ import { Controller } from 'react-hook-form'
 import { StyleSheet, Text } from 'react-native'
 import styled from 'styled-components/native'
 
-export const Input = styled.TextInput`
+export const InputStyle = styled.TextInput`
   border-bottom-width: 2px;
   border-bottom-color: #ebebeb;
   padding: 20px;
@@ -12,6 +12,37 @@ export const Input = styled.TextInput`
 type Props = {
   control: any
   errors: any
+}
+
+type PropsInput = {
+  control: any
+  errors: any,
+  rules: any
+  propsTextInput: any
+  errorMessage: string
+  name: string
+}
+
+export function Input({ control, errors, rules, propsTextInput, errorMessage, name }: PropsInput){
+  return (
+    <>
+      <Controller
+        control={control}
+        rules={{...rules}}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <InputStyle
+            style={errors[name] && styles.error}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            {...propsTextInput}
+          />
+        )}
+        name={name}
+      />
+    {errors[name] && <Text style={styles.textError}>{errorMessage}</Text>}
+    </>
+  )
 }
 
 export function InputEmail({ control, errors }: Props){
@@ -24,7 +55,7 @@ export function InputEmail({ control, errors }: Props){
           pattern: /.*@.*\..*/g
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <Input
+          <InputStyle
             style={errors.email && styles.error}
             onBlur={onBlur}
             onChangeText={onChange}
@@ -51,7 +82,7 @@ export function InputPassword({ control, errors }: Props){
           minLength: 5
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <Input
+          <InputStyle
             style={errors.password && styles.error}
             onBlur={onBlur}
             onChangeText={onChange}
