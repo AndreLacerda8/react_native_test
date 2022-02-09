@@ -3,6 +3,7 @@ import { AntDesign } from '@expo/vector-icons'
 
 interface ITextButton{
   color: string
+  left?: boolean
 }
 
 const Button = styled.TouchableOpacity`
@@ -19,8 +20,9 @@ const TextButton = styled.Text<ITextButton>`
   font-size: 30px;
   font-weight: bold;
   font-style: italic;
-  padding-right: 17px;
-  padding-bottom: 10px;
+  padding-right: ${props => props.left ? '0' : '12px'};
+  padding-left: ${props => props.left ? '12px' : '0'};
+  padding-bottom: 5px;
 `
 
 interface IProps{
@@ -35,7 +37,7 @@ export function CustomButton(props: IProps){
       {props.left ? (
         <>
           <AntDesign name='arrowleft' size={30} color={props.color} />
-          <TextButton color={props.color}>{props.title}</TextButton>
+          <TextButton left color={props.color}>{props.title}</TextButton>
         </>
       ) : (
         <>
