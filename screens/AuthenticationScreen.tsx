@@ -2,12 +2,12 @@ import styled from 'styled-components/native'
 import { Screen } from '../components/auth/Screen'
 import { CustomButton } from '../components/auth/CustomButton'
 import { FormTitle } from '../components/auth/FormTitle'
-import { Input } from '../components/auth/Input'
+import { InputEmail, InputPassword } from '../components/auth/Input'
 import { Form } from '../components/auth/Form'
 import { AuthenticationProps } from '../navigations/AuthNavigation'
-import { useState } from 'react'
 import { api } from '../services/axios.config'
-import { Alert } from 'react-native'
+import { Alert, StyleSheet, Text } from 'react-native'
+import { useForm } from "react-hook-form";
 
 const ForgotPassContainer = styled.TouchableOpacity`
   width: 100%;
@@ -22,18 +22,21 @@ const ForgotPass = styled.Text`
 `
 
 export function AuthenticationScreen ({ navigation }: AuthenticationProps) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  });
 
-  async function login(email: string, password: string){
+
+  async function login(formData: any){
     try {
       const { data } = await api.post('/login', {
-        email,
-        password
+        email: formData.email,
+        password: formData.password
       })
       console.log('DATA: ', data)
-      setEmail('')
-      setPassword('')
       navigation.navigate('Dashboard')
     } catch(error: any){
       Alert.alert(error.message)
@@ -44,24 +47,12 @@ export function AuthenticationScreen ({ navigation }: AuthenticationProps) {
     <Screen margin={50}>
       <FormTitle>Authentication</FormTitle>
       <Form>
-        <Input
-          value={email}
-          onChangeText={text => setEmail(text)}
-          placeholder='Email'
-          keyboardType='email-address'
-          autoCapitalize='none'
-        />
-        <Input
-          value={password}
-          onChangeText={text => setPassword(text)}
-          placeholder='Password'
-          secureTextEntry
-          autoCapitalize='none'
-        />
+        <InputEmail control={control} errors={errors} />
+        <InputPassword control={control} errors={errors} />
         <ForgotPassContainer onPress={() => navigation.navigate('ResetPassword')} activeOpacity={.5}>
           <ForgotPass>I forgot my password</ForgotPass>
         </ForgotPassContainer>
-        <CustomButton onPress={() => login(email, password)} title='Login' color='#B5C401' />
+        <CustomButton onPress={handleSubmit(login)} title='Login' color='#B5C401' />
       </Form>
       <CustomButton onPress={() => navigation.navigate('Registration')} title='Sign Up' color='#707070' />
     </Screen>
