@@ -10,6 +10,8 @@ import { Header } from '../components/UI/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { api } from '../services/axios.config'
 import { getGames } from '../store/actions/games'
+import { getBets } from '../store/actions/bets'
+import { Game } from '../store/reducers/games'
 
 const Screen = styled.View`
   flex: 1;
@@ -47,6 +49,24 @@ const NewBetText = styled.Text`
 
 export function DashboardScreen ({ navigation }: DashboardProps) {
   const [modalVisible, setModalVisible] = useState(false)
+  // @ts-expect-error
+  const games = useSelector(state => state.games.games)
+
+  // @ts-expect-error
+  const token = useSelector(state => state.user.token.token)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getBets(token))
+    dispatch(getGames())
+  }, [])
+
+  function filterAndBack(){
+    const selectedGames = games.filter((game: Game) => game.selected === true)
+    const selectedGamesFormated = selectedGames.map((game: Game) => game.type)
+    dispatch(getBets(token, selectedGamesFormated))
+    setModalVisible(false)
+  }
 
   return (
     <>
@@ -63,7 +83,7 @@ export function DashboardScreen ({ navigation }: DashboardProps) {
         </SecondHeader>
         <View>
           <ButtonOpenModal style={{marginTop: 30, marginLeft: 'auto', marginRight: 'auto'}} text='Filters' handleModal={() => setModalVisible(true)} />
-          <ModalFilter visible={modalVisible} onClose={() => setModalVisible(false)} />
+          <ModalFilter visible={modalVisible} onClose={filterAndBack} />
         </View>
         <AllBets />
       </Screen>

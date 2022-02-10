@@ -1,5 +1,8 @@
 import { Button, Modal } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/native'
+import { selectGame } from '../../store/actions/games'
+import { Game } from '../../store/reducers/games'
 
 const FiltersContainer = styled.View`
   flex: 1;
@@ -7,17 +10,23 @@ const FiltersContainer = styled.View`
   justify-content: center;
 `
 
-const FilterButton = styled.TouchableOpacity`
+interface IPropsButton{
+  color: string
+  selected: boolean | undefined
+}
+
+const FilterButton = styled.TouchableOpacity<IPropsButton>`
   margin-left: 10px;
   margin-bottom: 20px;
   min-width: 150px;
   padding: 10px 20px;
-  border: 2px solid ${(props: {color: string}) => props.color};
+  border: 2px solid ${props => props.color};
   border-radius: 100px;
+  background-color: ${props => props.selected ? props.color : 'transparent'};
 `
 
-const FilterButtonText = styled.Text`
-  color: ${(props: {color: string}) => props.color};
+const FilterButtonText = styled.Text<IPropsButton>`
+  color: ${props => props.selected ? '#fff' : props.color};
   font-size: 14px;
   font-weight: bold;
   font-style: italic;
@@ -30,21 +39,21 @@ interface IProps{
 }
 
 export function ModalFilter({ visible, onClose }: IProps){
+  // @ts-expect-error
+  const games = useSelector(state => state.games.games)
+  const dispatch = useDispatch()
+
   return (
     <Modal
       animationType="slide"
       visible={visible} 
     >
       <FiltersContainer>
-        <FilterButton color='#7F3992'>
-          <FilterButtonText color='#7F3992'>Lotofácil</FilterButtonText>
-        </FilterButton>
-        <FilterButton color='#01AC66'>
-          <FilterButtonText color='#01AC66'>Mega-Sena</FilterButtonText>
-        </FilterButton>
-        <FilterButton color='#F79C31'>
-          <FilterButtonText color='#F79C31'>Lotomania</FilterButtonText>
-        </FilterButton>
+        {games.map((game: Game) => (
+          <FilterButton selected={game.selected} onPress={() => dispatch(selectGame(game.id))} key={game.id} color={game.color}>
+            <FilterButtonText selected={game.selected} color={game.color}>{game.type}</FilterButtonText>
+          </FilterButton>
+        ))}
         <Button title='Back' onPress={onClose} />
       </FiltersContainer>
     </Modal>
