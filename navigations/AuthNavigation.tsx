@@ -45,9 +45,12 @@ type AuthStack = {
   Registration: undefined
   Dashboard: undefined
   NewBetNav: undefined
+  Cart: undefined
 }
 
 export type AuthenticationProps = NativeStackScreenProps<AuthStack, 'Authentication'>
 export type ResetPasswordProps = NativeStackScreenProps<AuthStack, 'ResetPassword'>
 export type RegistrationProps = NativeStackScreenProps<AuthStack, 'Registration'>
 export type DashboardProps = NativeStackScreenProps<AuthStack, 'Dashboard'>
+export type NewBetProps = NativeStackScreenProps<AuthStack, 'NewBetNav'>
+export type CartProps = NativeStackScreenProps<AuthStack, 'Cart'>

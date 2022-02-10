@@ -3,17 +3,18 @@ import styled from 'styled-components/native'
 import { AntDesign } from '@expo/vector-icons'
 import { useState } from 'react'
 import { AllBets } from '../components/dashboard/AllBets'
-import { ModalFilter } from '../components/ModalFilter'
+import { ModalFilter } from '../components/UI/ModalFilter'
 import { DashboardProps } from '../navigations/AuthNavigation'
-import { ButtonOpenModal } from '../components/ButtonOpenModal'
+import { ButtonOpenModal } from '../components/UI/ButtonOpenModal'
+import { Header } from '../components/UI/Header'
 // import { useSelector } from 'react-redux'
 
 const Screen = styled.View`
   flex: 1;
-  margin-top: 60px;
+  margin-top: 30px;
 `
 
-const Header = styled.View`
+const SecondHeader = styled.View`
   width: 90%;
   margin: 0 auto;
   flex-direction: row;
@@ -47,21 +48,24 @@ export function DashboardScreen ({ navigation }: DashboardProps) {
   const [modalVisible, setModalVisible] = useState(false)
 
   return (
-    <Screen>
-      <Header>
-        <Recents>Recent Games</Recents>
-        <NewBetContainer onPress={() => navigation.navigate('NewBetNav')} activeOpacity={.5}>
-          <>
-            <NewBetText>New Bet</NewBetText>
-            <AntDesign name='arrowright' size={18} color='#B5C401' />
-          </>
-        </NewBetContainer>
-      </Header>
-      <View>
-        <ButtonOpenModal style={{marginTop: 30, marginLeft: 'auto', marginRight: 'auto'}} text='Filters' handleModal={() => setModalVisible(true)} />
-        <ModalFilter visible={modalVisible} onClose={() => setModalVisible(false)} />
-      </View>
-      <AllBets />
-    </Screen>
+    <>
+      <Header styles={{marginTop: 30}} text='Account' onPress={() => {}} />
+      <Screen>
+        <SecondHeader>
+          <Recents>Recent Games</Recents>
+          <NewBetContainer onPress={() => navigation.navigate('NewBetNav')} activeOpacity={.5}>
+            <>
+              <NewBetText>New Bet</NewBetText>
+              <AntDesign name='arrowright' size={18} color='#B5C401' />
+            </>
+          </NewBetContainer>
+        </SecondHeader>
+        <View>
+          <ButtonOpenModal style={{marginTop: 30, marginLeft: 'auto', marginRight: 'auto'}} text='Filters' handleModal={() => setModalVisible(true)} />
+          <ModalFilter visible={modalVisible} onClose={() => setModalVisible(false)} />
+        </View>
+        <AllBets />
+      </Screen>
+    </>
   )
 }

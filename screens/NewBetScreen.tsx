@@ -4,6 +4,8 @@ import styled from 'styled-components/native'
 import { NumberButton } from '../components/newbet/NumberButton'
 import { ChooseGame } from '../components/newbet/ChooseGame'
 import { Actions } from '../components/newbet/Actions'
+import { Header } from '../components/UI/Header'
+import { NewBetProps } from '../navigations/AuthNavigation'
 
 const Screen = styled.View`
   flex: 1;
@@ -38,23 +40,26 @@ const NumbersContainer = styled.View`
   justify-content: center;
 `
 
-export function NewBetScreen(){
+export function NewBetScreen({ navigation }: NewBetProps){
   const [modalVisible, setModalVisible] = useState(false)
 
   const numbers = new Array(20).fill(0).map((num, index) => index < 9 ? '0' + (index + 1) : (index + 1) + '')
 
   return (
-    <Screen>
-      <ScrollView>
-        <BetTitle><Text style={{ fontWeight: 'bold' }}>New Bet</Text> For Lotofácil</BetTitle>
-        <ChooseGame visible={modalVisible} onOpen={() => setModalVisible(true)} onClose={() => setModalVisible(false)} />
-        <TitleDescription>Fill your bet</TitleDescription>
-        <TextDescription>Mark as many numbers as you want up to a maximum of 50. Win by hitting 15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn.</TextDescription>
-        <NumbersContainer>
-          {numbers.map(num => <NumberButton key={num} number={num} />)}
-        </NumbersContainer>
-        <Actions />
-      </ScrollView>
-    </Screen>
+    <>
+      <Header text='Back' onPress={() => navigation.navigate('Dashboard')} />
+      <Screen>
+        <ScrollView>
+          <BetTitle><Text style={{ fontWeight: 'bold' }}>New Bet</Text> For Lotofácil</BetTitle>
+          <ChooseGame visible={modalVisible} onOpen={() => setModalVisible(true)} onClose={() => setModalVisible(false)} />
+          <TitleDescription>Fill your bet</TitleDescription>
+          <TextDescription>Mark as many numbers as you want up to a maximum of 50. Win by hitting 15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn.</TextDescription>
+          <NumbersContainer>
+            {numbers.map(num => <NumberButton key={num} number={num} />)}
+          </NumbersContainer>
+          <Actions />
+        </ScrollView>
+      </Screen>
+    </>
   )
 }

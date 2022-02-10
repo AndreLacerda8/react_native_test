@@ -2,6 +2,8 @@ import { Dimensions, ScrollView, Text } from 'react-native'
 import styled from 'styled-components/native'
 import { BetCard } from '../components/cart/BetCard'
 import { SaveButton } from '../components/cart/SaveButton'
+import { Header } from '../components/UI/Header'
+import { CartProps } from '../navigations/AuthNavigation'
 
 const Screen = styled.View`
   flex: 1;
@@ -36,17 +38,20 @@ const TotalText = styled.Text`
   margin-bottom: 20px;
 `
 
-export function CartScreen(){
+export function CartScreen({ navigation }: CartProps){
   return (
-    <Screen>
-      <CartContainer>
-        <Title>Cart</Title>
-        <ScrollView>
-          <BetCard />
-        </ScrollView>
-        <TotalText><Text style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Cart</Text> Total: R$ 7,00</TotalText>
-        <SaveButton />
-      </CartContainer>
-    </Screen>
+    <>
+      <Header text='Back' onPress={() => navigation.navigate('Dashboard')} />
+      <Screen>
+        <CartContainer>
+          <Title>Cart</Title>
+          <ScrollView>
+            <BetCard />
+          </ScrollView>
+          <TotalText><Text style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Cart</Text> Total: R$ 7,00</TotalText>
+          <SaveButton />
+        </CartContainer>
+      </Screen>
+    </>
   )
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
-import { ButtonOpenModal } from '../ButtonOpenModal'
-import { ModalFilter } from '../ModalFilter'
+import { ButtonOpenModal } from '../UI/ButtonOpenModal'
+import { ModalFilter } from '../UI/ModalFilter'
 
 const ChooseGameContainer = styled.View`
   flex-direction: row;
