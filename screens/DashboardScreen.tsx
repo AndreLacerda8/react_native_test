@@ -1,13 +1,15 @@
 import { View } from 'react-native'
 import styled from 'styled-components/native'
 import { AntDesign } from '@expo/vector-icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AllBets } from '../components/dashboard/AllBets'
 import { ModalFilter } from '../components/UI/ModalFilter'
 import { DashboardProps } from '../navigations/AuthNavigation'
 import { ButtonOpenModal } from '../components/UI/ButtonOpenModal'
 import { Header } from '../components/UI/Header'
-// import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { api } from '../services/axios.config'
+import { getGames } from '../store/actions/games'
 
 const Screen = styled.View`
   flex: 1;
@@ -44,7 +46,6 @@ const NewBetText = styled.Text`
 `
 
 export function DashboardScreen ({ navigation }: DashboardProps) {
-  // const name = useSelector(state => state.user.user.name)
   const [modalVisible, setModalVisible] = useState(false)
 
   return (

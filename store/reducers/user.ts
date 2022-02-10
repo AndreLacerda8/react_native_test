@@ -13,22 +13,13 @@ const initialState: UserState = {
 export function userReducer(state: UserState = initialState, action: any){
   switch(action.type){
     case USER_LOGIN:
-      console.log({
-        token: {...action.payload.token},
-        user: {...action.payload.user}
-      })
       return {
         ...state,
         token: {...action.payload.token},
         user: {...action.payload.user}
       }
 
-
     case SIGNUP_USER:
-      console.log({
-        token: {...action.payload.token},
-        user: {...action.payload.user}
-      })
       return {
         ...state,
         token: {...action.payload.token},
