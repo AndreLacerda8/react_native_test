@@ -5,6 +5,7 @@ import { AuthenticationScreen } from '../screens/AuthenticationScreen'
 import { RegistrationScreen } from '../screens/RegistrationScreen'
 import { ResetPasswordScreen } from '../screens/ResetPasswordScreen'
 import { DashboardScreen } from '../screens/DashboardScreen'
+import { NewBetScreen } from '../screens/NewBetScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -16,6 +17,7 @@ export function AuthNavigation(){
         <Stack.Screen options={{ headerShown: false }} name='ResetPassword' component={ResetPasswordScreen} />
         <Stack.Screen options={{ headerShown: false }} name='Registration' component={RegistrationScreen} />
         <Stack.Screen options={{ headerShown: false }} name='Dashboard' component={DashboardScreen} />
+        <Stack.Screen options={{ headerShown: false }} name='NewBet' component={NewBetScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -26,8 +28,10 @@ type AuthStack = {
   ResetPassword: undefined
   Registration: undefined
   Dashboard: undefined
+  NewBet: undefined
 }
 
 export type AuthenticationProps = NativeStackScreenProps<AuthStack, 'Authentication'>
 export type ResetPasswordProps = NativeStackScreenProps<AuthStack, 'ResetPassword'>
 export type RegistrationProps = NativeStackScreenProps<AuthStack, 'Registration'>
+export type DashboardProps = NativeStackScreenProps<AuthStack, 'Dashboard'>

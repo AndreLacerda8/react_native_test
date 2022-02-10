@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Alert, Button, Modal } from 'react-native'
+import { Button, Modal } from 'react-native'
 import styled from 'styled-components/native'
 
 const FiltersContainer = styled.View`

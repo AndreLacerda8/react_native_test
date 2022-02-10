@@ -4,12 +4,12 @@ import { AntDesign } from '@expo/vector-icons'
 import { useState } from 'react'
 import { AllBets } from '../components/dashboard/AllBets'
 import { ModalFilter } from '../components/dashboard/ModalFilter'
+import { DashboardProps } from '../navigations/AuthNavigation'
 // import { useSelector } from 'react-redux'
 
 const Screen = styled.View`
   flex: 1;
-  margin-top: 80px;
-  background-color: #F7F7F7;
+  margin-top: 60px;
 `
 
 const Header = styled.View`
@@ -54,7 +54,7 @@ const FilterText = styled.Text`
   text-align: center;
 `
 
-export function DashboardScreen () {
+export function DashboardScreen ({ navigation }: DashboardProps) {
   // const name = useSelector(state => state.user.user.name)
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -62,7 +62,7 @@ export function DashboardScreen () {
     <Screen>
       <Header>
         <Recents>Recent Games</Recents>
-        <NewBetContainer activeOpacity={.5}>
+        <NewBetContainer onPress={() => navigation.navigate('NewBet')} activeOpacity={.5}>
           <>
             <NewBetText>New Bet</NewBetText>
             <AntDesign name='arrowright' size={18} color='#B5C401' />
