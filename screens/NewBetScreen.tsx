@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { ScrollView, Text } from 'react-native'
 import styled from 'styled-components/native'
-import { ModalFilter } from '../components/dashboard/ModalFilter'
+import { ModalFilter } from '../components/ModalFilter'
 import { ActionButton } from '../components/newbet/ActionButton'
 import { NumberButton } from '../components/newbet/NumberButton'
 import { Ionicons } from '@expo/vector-icons'
+import { ButtonOpenModal } from '../components/ButtonOpenModal'
 
 const Screen = styled.View`
   flex: 1;
@@ -90,9 +91,7 @@ export function NewBetScreen(){
       <ScrollView>
         <BetTitle><Text style={{ fontWeight: 'bold' }}>New Bet</Text> For Lotofácil</BetTitle>
         <ChooseGameContainer>
-          <ChooseGameOpenModal activeOpacity={.5} onPress={() => setModalVisible(true)}>
-            <ChooseGameText>Choose a game</ChooseGameText>
-          </ChooseGameOpenModal>
+          <ButtonOpenModal text='Choose a game' handleModal={() => setModalVisible(true)} />
           <ModalFilter visible={modalVisible} onClose={() => setModalVisible(false)} />
           <FilterButton color='#7F3992'>
             <FilterButtonText>Lotofácil</FilterButtonText>

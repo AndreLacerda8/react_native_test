@@ -3,8 +3,9 @@ import styled from 'styled-components/native'
 import { AntDesign } from '@expo/vector-icons'
 import { useState } from 'react'
 import { AllBets } from '../components/dashboard/AllBets'
-import { ModalFilter } from '../components/dashboard/ModalFilter'
+import { ModalFilter } from '../components/ModalFilter'
 import { DashboardProps } from '../navigations/AuthNavigation'
+import { ButtonOpenModal } from '../components/ButtonOpenModal'
 // import { useSelector } from 'react-redux'
 
 const Screen = styled.View`
@@ -70,9 +71,7 @@ export function DashboardScreen ({ navigation }: DashboardProps) {
         </NewBetContainer>
       </Header>
       <View>
-        <FilterOpenModal activeOpacity={.5} onPress={() => setModalVisible(true)}>
-          <FilterText>Filters</FilterText>
-        </FilterOpenModal>
+        <ButtonOpenModal style={{marginTop: 30, marginLeft: 'auto', marginRight: 'auto'}} text='Filters' handleModal={() => setModalVisible(true)} />
         <ModalFilter visible={modalVisible} onClose={() => setModalVisible(false)} />
       </View>
       <AllBets />

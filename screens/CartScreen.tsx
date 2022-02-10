@@ -37,7 +37,7 @@ const TotalText = styled.Text`
 `
 
 const SaveButton = styled.TouchableOpacity`
-  background-color: #E2E2E2;
+  background-color: #F4F4F4;
   width: 100%;
   flex-direction: row;
   align-items: center;
