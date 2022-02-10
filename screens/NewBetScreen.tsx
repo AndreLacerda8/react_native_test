@@ -8,7 +8,6 @@ import { Ionicons } from '@expo/vector-icons'
 
 const Screen = styled.View`
   flex: 1;
-  margin-top: 50px;
   margin-bottom: 10px;
   padding: 15px;
 `
@@ -69,6 +68,7 @@ const NumbersContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 20px;
+  margin-bottom: 25px;
   align-items: center;
   justify-content: center;
 `
@@ -77,7 +77,7 @@ const ActionsContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  margin-top: 25px;
+  margin-bottom: 25px;
 `
 
 export function NewBetScreen(){
