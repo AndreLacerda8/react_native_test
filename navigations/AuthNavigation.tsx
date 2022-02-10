@@ -33,7 +33,7 @@ export function AuthNavigation(){
         <Stack.Screen options={{ headerShown: false }} name='ResetPassword' component={ResetPasswordScreen} />
         <Stack.Screen options={{ headerShown: false }} name='Registration' component={RegistrationScreen} />
         <Stack.Screen options={{ headerShown: false }} name='Dashboard' component={DashboardScreen} />
-        <Stack.Screen options={{ headerShown: false }} name='NewBet' component={NewBetNavigator} />
+        <Stack.Screen options={{ headerShown: false }} name='NewBetNav' component={NewBetNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -44,7 +44,7 @@ type AuthStack = {
   ResetPassword: undefined
   Registration: undefined
   Dashboard: undefined
-  NewBet: undefined
+  NewBetNav: undefined
 }
 
 export type AuthenticationProps = NativeStackScreenProps<AuthStack, 'Authentication'>

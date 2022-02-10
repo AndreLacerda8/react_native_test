@@ -42,19 +42,6 @@ const NewBetText = styled.Text`
   padding-right: 5px;
 `
 
-const FilterOpenModal = styled.TouchableOpacity`
-  margin: 30px auto 0;
-  background-color: #b1aeae;
-  padding: 10px 30px;
-  border-radius: 20px;
-`
-
-const FilterText = styled.Text`
-  color: #000;
-  font-style: italic;
-  text-align: center;
-`
-
 export function DashboardScreen ({ navigation }: DashboardProps) {
   // const name = useSelector(state => state.user.user.name)
   const [modalVisible, setModalVisible] = useState(false)
@@ -63,7 +50,7 @@ export function DashboardScreen ({ navigation }: DashboardProps) {
     <Screen>
       <Header>
         <Recents>Recent Games</Recents>
-        <NewBetContainer onPress={() => navigation.navigate('NewBet')} activeOpacity={.5}>
+        <NewBetContainer onPress={() => navigation.navigate('NewBetNav')} activeOpacity={.5}>
           <>
             <NewBetText>New Bet</NewBetText>
             <AntDesign name='arrowright' size={18} color='#B5C401' />
